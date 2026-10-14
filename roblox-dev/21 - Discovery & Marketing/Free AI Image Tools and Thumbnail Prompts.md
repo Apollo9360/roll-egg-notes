@@ -16,6 +16,7 @@ How to make Roblox thumbnails, icons and item icons for free with AI tools, plus
 
 - Use free generators that accept **reference images**: Gemini (Nano Banana 2), Google Flow and ChatGPT.
 - Do layout and text yourself in **Photopea** or **Canva**.
+- **Every prompt sells the core fantasy** so the game is clear without its title: steal an egg, roll it home as it grows, and escape the guard ([[Show the core fantasy and loop]]).
 - Test 10–25 distinct thumbnails in ads before choosing the 2–5 for the home page.
 
 The strategy is in [[Thumbnails and Icons]] (Hud's Guide, chapter 07). This note covers tools and prompts only.
@@ -110,100 +111,164 @@ human. Clean hands with no extra fingers.
 
 Generate **without text**, then add text yourself. Ask for "no text"; AI lettering is unreliable even when it looks fine at full size.
 
+## Sell the core fantasy first
+
+From [[Show the core fantasy and loop]] (Hud's Guide): the thumbnail must explain the game in one image, readable within about 100 px, so a kid knows exactly what they would be doing, **without the title**. It shows the action rather than the object, the core loop rather than side mechanics, the player **winning**, and the key item made special.
+
+### What Roll and Steal an Egg! is, in one picture
+
+Taken from this repo's `DEV_NOTES.md`:
+1. **Steal:** grab an egg from a guarded nest in a biome (Meadow, then Riverbank, then Canyon, and more as Speed unlocks them).
+2. **Roll it home:** the egg **grows with every step you roll it**, like a snowball. Bigger eggs carry more luck (the green clover x-multiplier), so **bigger egg = rarer pet**.
+3. **Escape:** the nest's guard chases you until you cross the gold **SAFE ZONE** line.
+4. **Hatch:** place the egg on your plot. After its timer, it hatches a pet that earns cash per second.
+
+**The hook versus other "steal" games is rolling an egg that keeps getting bigger.** Every concept below shows three things:
+- the **roll**: the egg on the ground, pushed and rolling, never held in the arms;
+- the **size**: the egg bigger than the player, the payoff;
+- the **steal tension**: a guard chasing, or the nest left behind.
+
+**Leave these off as the main subject.** They are side mechanics and don't explain the game:
+- the hamster wheel;
+- skip and hatch timers;
+- plot layout;
+- Speed numbers;
+- wheel tiers.
+
+**Honesty check:** use the real look of your eggs, guards and pets.
+- Attach Studio screenshots of the actual guard model, a rolled egg and an Owl pet.
+- AI-invented monsters that aren't in the game cause the expectation gap described in [[Honesty vs clickbait]].
+- Confirm with one screenshot that the rolled egg really sits on the ground in front of the player, and adjust "pushing" to match the in-game pose.
+
+### Fantasy block
+
+Paste this into every prompt, before the style block:
+
+```
+Core idea the image must show at a glance: the player has just stolen an egg from a guarded nest
+and is ROLLING it home along the ground like a giant snowball. The egg grows bigger with every
+step and is already much bigger than the player. A guard monster is chasing them. The player is
+winning: fast, excited, just out of reach.
+```
+
 ## Thumbnail prompts for Roll and Steal an Egg!
 
-Each concept is a different idea, so they test as distinct thumbnails. Attach your Studio screenshots as references wherever you can.
+The concepts below are distinct, so they test as different thumbnails, but they all sell the same loop. Attach your Studio screenshots (guard, rolled egg, nest, Owl pet) as references wherever the tool allows it.
 
-**1. The steal chase.** This is the proven Steal an Egg format.
+**1. The getaway roll** (hero shot; closest to the proven Steal an Egg chase)
 ```
-A Roblox avatar sprinting toward the camera hugging a giant glowing golden egg, terrified-excited
-face, a huge angry guard monster chasing right behind with arms reaching out, motion lines, dust
-kicking up. Plain bright green studded ground and a simple blue sky. The avatar fills the left
-two-thirds of the frame; the guard looms behind on the right. [style block] [avatar block]
-```
-
-**2. Egg size before/after.** Exaggerate the size difference.
-```
-Split-screen before/after. Left side: a Roblox avatar holding a tiny plain white egg, bored face,
-dull grey background. Right side: the SAME avatar straining to carry an enormous rainbow egg twice
-their height, shocked happy face, glowing sparkles, bright yellow background. A thick black
-vertical divider. [style block] [avatar block]
-```
-Add the text yourself: "SMALL" vs "HUGE", or "1 vs 1,000,000".
-
-**3. Day 1 vs Day 100.**
-```
-Split-screen comparison of a player's plot. Left: an empty dirt plot with one cracked small egg.
-Right: a packed plot with six giant glowing eggs on incubators, a spinning prize wheel and a crowd
-of rare voxel pets with golden auras. Same Roblox avatar in both halves, sad on the left, cheering
-on the right. [style block] [avatar block]
+Low camera, the Roblox avatar sprinting toward the camera while pushing a gigantic glowing
+rainbow egg that rolls on the ground in front of them; the egg is twice the avatar's height and
+leaves a trail of dust and sparkles behind it. Right behind them a huge angry guard monster
+lunges with arms out but is just out of reach. Far in the background, a tiny nest with small
+plain eggs. Bright green studded grass, plain blue sky. The egg is the biggest, brightest thing
+in the frame. [fantasy block] [style block] [avatar block]
 ```
 
-**4. The prize wheel.**
+**2. The snowball trail** (growth told without words)
 ```
-Close-up of a Roblox avatar slamming a giant colorful prize wheel, the pointer landing on a glowing
-"LEGENDARY" slice (render the slice as a golden star icon, no letters), coins and sparkles exploding
-outward, the avatar's mouth wide open. Simple purple radial background. [style block] [avatar block]
+High three-quarter view of one curving path from a nest in the far background to the
+foreground. Along the path the SAME egg appears three times, growing: tiny at the nest, medium
+halfway, enormous in the foreground where the avatar is pushing it and grinning. A guard monster
+stands at the nest end, shaking its fists. Simple bright meadow, path clearly visible.
+[fantasy block] [style block] [avatar block]
+```
+Optional text: "1 STEP" by the tiny egg and "1,000 STEPS" by the giant one.
+
+**3. Small egg vs giant egg** (before/after; sells "bigger = rarer")
+```
+Split-screen, same avatar on both sides. Left (dull grey background): the avatar rolls a tiny
+plain egg, and a plain little chick pops out; the avatar shrugs. Right (bright golden
+background): the avatar rolls an enormous rainbow egg bigger than a house, and a glowing
+legendary pet bursts out of it with light rays; the avatar cheers. Thick black divider.
+[fantasy block] [style block] [avatar block]
+```
+Optional text, using the real in-game clover icon: "x1 LUCK" vs "x1,000 LUCK", or "TINY" vs "GIANT".
+
+**4. Across the safe line** (the close call; the stealing thrill)
+```
+Side-on action shot: the avatar and their giant rolling egg are mid-leap across a glowing gold
+line painted on the ground. The guard monster skids to a stop exactly at the line, its hand
+inches from the egg, furious. The avatar looks back laughing. Clean bright grass on the safe
+side, darker grass on the guard's side. [fantasy block] [style block] [avatar block]
 ```
 
-**5. The hatch reveal.**
+**5. Bigger than everything** (oversell the power fantasy)
 ```
-A giant egg cracking open with blinding golden light beams, a cute voxel owl pet bursting out with
-wings spread and big sparkly eyes, the Roblox avatar recoiling in amazement in the foreground,
-confetti-like sparkles. Dark blue simple background so the light pops. [style block] [avatar block]
-```
-
-**6. First-person grab.**
-```
-First-person view: two blocky Roblox hands reaching to grab a huge glowing purple egg from a nest,
-a sleeping guard monster just behind the nest with one eye opening. Tension, close crop, the egg
-dominates the center. [style block]
+Wide shot: the avatar pushes an egg so enormous it towers over trees and fences, rolling it out
+of a canyon nest area, while a now-tiny guard monster runs away from the egg in panic. Dust,
+motion lines, sparkles. The avatar is small but clearly in control and smiling. Bright orange
+canyon, blue sky. [fantasy block] [style block] [avatar block]
 ```
 
-**7. "YOU" versus the guard.**
+**6. Day 1 vs Day 100** (progression: weak but winning, then overpowered)
 ```
-Low-angle hero shot: a small Roblox avatar standing defiantly holding an egg above their head,
-facing a gigantic guard monster that fills the background, the guard's shadow over the avatar.
-Leave clear empty space above the avatar's head for a label. [style block] [avatar block]
+Split-screen. Left, "Day 1": the avatar rolls a pebble-sized egg away from a small sleepy guard
+in a green meadow, looking proud. Right, "Day 100": the same avatar, now with a glowing trail,
+rolls a gigantic shining egg out of a dramatic canyon while a giant guard falls behind in the
+dust. A rare glowing pet follows the avatar. Same avatar, same art style.
+[fantasy block] [style block] [avatar block]
 ```
-Add a red "YOU" arrow pointing at the avatar.
+Add the text "DAY 1" and "DAY 100" yourself, in a thick, simple font.
 
-**8. Rarity ladder.** Shows the collection fantasy.
+**7. Over-the-shoulder steal** (puts the player in the action)
 ```
-A row of five eggs growing in size from left to right: grey, green, blue, purple, golden-rainbow,
-each glowing brighter with sparkles, the last one huge with light rays. A Roblox avatar at the end
-pointing at the biggest one with an excited face. Clean light-blue background. [style block]
-[avatar block]
-```
-
-**9. Stealing from a friend.** The social fantasy; stealing tests better than defending.
-```
-A sneaky Roblox avatar tiptoeing away from another player's plot carrying a giant shiny egg, the
-other player in the background turning around shocked. Cartoon "sneaky" pose, finger to lips.
-Bright simple plots with low fences. [style block] [avatar block]
+Over-the-shoulder view from just behind the avatar's head: both blocky hands pushing a huge
+glowing egg forward down a bright path toward a gold safe line in the distance. In the
+corner of the frame, a guard monster's hand reaches in from behind, almost touching the avatar.
+Sense of speed. [fantasy block] [style block]
 ```
 
-**10. Meme reaction.** Lower effort, sometimes wins.
+**8. The hatch payoff, with the steal still visible**
 ```
-Extreme close-up of a Roblox avatar's face with a shocked meme expression, eyes popping, reflected
-in their eyes a giant glowing rainbow egg. Plain red background. [style block] [avatar block]
+Foreground: a giant egg cracking open with golden light rays and a rare glowing voxel owl
+bursting out, wings spread; the avatar cheers next to it with both arms up. Background, small
+but clear: the guard monster at the edge of the meadow, sulking, and the long trail in the grass
+where the egg was rolled. [fantasy block] [style block] [avatar block]
+```
+Use the Owl as it looks in the game; it is Meadow's real Epic pet.
+
+**9. Shocked face** (meme-style; cheap to test)
+```
+Extreme close-up of the avatar's shocked, delighted face, mouth wide open, as the gigantic
+rainbow egg they are rolling looms over them, filling the top half of the frame. A tiny guard
+monster is visible in the gap between them, chasing. Plain bright red background.
+[fantasy block] [style block] [avatar block]
 ```
 
-**11. Girl set.** Run alongside a boy set for mixed audiences.
+**10. Girl set** (run it next to a boy set)
 ```
-Same scene as concept 1 but the avatar is a girl Roblox avatar with pink hair and a pink outfit,
-carrying a giant pastel-pink sparkly egg with a cute bunny-ear pattern, a silly-looking guard
-chasing. [style block]
+Same composition as concept 1, but the avatar is a girl Roblox avatar with pink hair and a pink
+outfit, rolling a giant pastel-pink sparkly egg away from a silly-looking guard monster.
+[fantasy block] [style block]
 ```
 
-**12. Studio-scene enhance.** Uses your real build.
+**11. Studio scene, enhanced** (most honest; uses your real build)
 ```
-[Attach a Studio screenshot of your nest zone with your avatar and a guard.] Turn this exact scene
-into a polished cartoon game thumbnail. Keep the layout, the egg, the guard and the colors, but
-make the avatar 2x bigger and closer to the camera, add an excited expression, motion and glow on
-the egg, simplify the background into flat bright shapes, and add a thick dark outline around the
-avatar, egg and guard. [style block]
+[Attach a Studio screenshot of your avatar rolling a big egg away from a guard in the Meadow.]
+Turn this exact scene into a polished cartoon thumbnail. Keep the egg, guard, avatar and colors.
+Make the egg 2x bigger, move the avatar and egg closer to the camera, add motion lines and a
+dust trail behind the rolling egg, give the avatar an excited face, simplify the background into
+flat bright shapes, and add thick dark outlines around the avatar, egg and guard.
+[fantasy block] [style block]
 ```
+
+### The 100-pixel test, for every candidate
+
+Shrink each image to about 100 px wide and ask someone who hasn't seen the game, ideally a kid in the target age range, "What do you do in this game?"
+
+**Keep it** if they say something like "roll a giant egg away from a monster" or "steal an egg and it gets bigger". **Rework it** if they say "it's about pets" or "a monster game". Then:
+- make the egg bigger and closer;
+- add the trail or dust behind the egg;
+- make the guard more obviously chasing.
+
+### Text on the image
+
+Text is optional ([[Composition, contrast and text]]). If you add it:
+- Use at most a few words: STEAL · ROLL · GIANT, "1 STEP / 1,000 STEPS", "x1 vs x1,000 LUCK".
+- Add it yourself, in a thick, outlined font.
+- Never use the game title or a logo.
+- Test a no-text version of every winner.
 
 ### Reskin prompt
 
@@ -211,49 +276,55 @@ Gives an honest version of a proven layout:
 
 ```
 [Attach: 1) a top-performing genre thumbnail for LAYOUT ONLY, 2) screenshots of my avatar, guard,
-eggs and pets.] Create a new thumbnail that borrows only the composition and camera angle of
-image 1, but uses my characters and objects from the other images. Do not copy any character,
-logo, text or artwork from image 1. [style block]
+rolled egg and pets.] Create a new thumbnail that borrows only the composition and camera angle
+of image 1, but shows MY game's idea: the player rolling a giant growing egg away from a guard.
+Use my characters and objects from the other images. Do not copy any character, logo, text or
+artwork from image 1. [fantasy block] [style block]
 ```
 
 ### Variation prompts for a winner
 
 Use these after a thumbnail wins, one change at a time:
-- `Same image, but make the main character 30% bigger and closer to the camera.`
-- `Same image, but swap the background to a flat bright yellow and remove all clutter.`
-- `Same image, but the egg is diamond instead of gold so it stands out from everything else.`
-- `Same image, but change the guard to a different, scarier monster.`
-- `Same image, mirrored, with the character running left-to-right.`
-- `Same image, no text version` (to test against a version with text).
+- `Same image, but make the rolling egg 50% bigger and closer to the camera.`
+- `Same image, but add a dust and sparkle trail behind the rolling egg.`
+- `Same image, but the egg is diamond-blue instead of gold, so it stands out from everything else.`
+- `Same image, but the guard is closer, almost touching the avatar.`
+- `Same image, but swap the background to a flat bright color and remove all clutter.`
+- `Same image, mirrored, with the avatar rolling left to right.`
+- `Same image, no text version` (to test against the version with text).
 
 ### Clean-up prompts
 
 - `Fix the hands so each has four blocky fingers like a Roblox character.`
+- `Make the egg clearly touch the ground and roll; it must not float or be held.`
 - `Remove the extra limbs and any muddy texture; keep everything else identical.`
 - `Make it less realistic and more like a clean cartoon render; flatten the grass into a simple color.`
 - `Upscale to 1920x1080, sharpen edges, keep colors identical.`
 
 ## Game icon prompts (512×512)
 
-Most players say icons matter less than thumbnails, and Roblox shows no icon CTR. The common move is to adapt your best thumbnail. Fill the square with **one** subject.
+Most players say icons matter less than thumbnails, and Roblox shows no icon CTR. The common move is to adapt your best thumbnail. Even in a square, show the **roll**, not just an egg.
 
-**Icon A, face plus egg:**
+**Icon A, rolling the giant egg:**
 ```
-Square game icon. Close-up of a Roblox avatar's excited face hugging a giant glowing golden egg
-that fills most of the frame, bright sparkles, solid bright blue background, thick black outline
-around the character and egg. Readable at 150x150 pixels. No text.
-```
-
-**Icon B, the guard:**
-```
-Square game icon. A giant cartoon guard monster's face peeking from the edge, glaring at a shiny
-egg in the foreground. Bold colors, strong contrast, solid orange background. No text.
+Square game icon. Side view of a Roblox avatar leaning forward, pushing a gigantic glowing
+rainbow egg that fills two-thirds of the frame; dust puffs under the egg show it is rolling.
+Solid bright blue background, thick black outlines. Readable at 150x150 pixels. No text.
+[avatar block]
 ```
 
-**Icon C, the cracking egg:**
+**Icon B, the close call:**
 ```
-Square game icon. One huge rainbow egg cracking with golden light rays bursting out, centered,
-on a deep purple background, chunky studded texture on the shell. No text.
+Square game icon. The avatar's excited face in the foreground and their giant rolling egg
+beside them, with a guard monster's hand reaching in from the corner, almost touching the egg.
+Bold colors, strong contrast, solid orange background. No text. [avatar block]
+```
+
+**Icon C, the snowball egg:**
+```
+Square game icon. One huge rolling egg with motion lines and a short trail of smaller "ghost"
+eggs behind it showing that it grew, a tiny avatar pushing it, bright meadow-green background,
+chunky studded shell. No text. [avatar block]
 ```
 
 Optional number badge: add short text like "1M" in Photopea, not with the AI.
@@ -288,7 +359,8 @@ For an existing set's look, attach two or three of your current icons and add: `
 ## Testing checklist
 
 - [ ] At least 10 truly different concepts, not 10 colour swaps of one.
-- [ ] Every thumbnail shows the **real** core loop: steal, run, place, roll, hatch. Ad CTR that doesn't carry over to home PTR usually means clickbait.
+- [ ] Every thumbnail passes the 100-pixel test: a stranger can tell you to steal an egg and roll it home as it grows, with no title.
+- [ ] Every thumbnail shows the **real** loop (steal, roll and grow, escape, hatch) with real in-game eggs, guards and pets. Ad CTR that doesn't carry over to home PTR usually means clickbait.
 - [ ] Readable at about 100 px; the subject is larger than any background object.
 - [ ] Nothing important in the bottom 15%.
 - [ ] No Robux logo, no game title or logo on the thumbnail, no copied IP.
@@ -298,7 +370,11 @@ For an existing set's look, attach two or three of your current icons and add: `
 
 ## Related notes
 
+- [[Show the core fantasy and loop]]: the rule these prompts are built on.
 - [[Thumbnails and Icons]]: CTR targets, testing volume, kill/keep rules, winners and flops.
+- [[Examples of winners and flops]]
+- [[Honesty vs clickbait]]
+- [[Designing for kids and age gates]]
 - [[Composition, contrast and text]]
 - [[AI workflows, tools and artists]]
 - [[Ad CTR vs home PTR and page setup]]
@@ -307,7 +383,8 @@ For an existing set's look, attach two or three of your current icons and add: `
 ## Sources
 
 - Roblox creator docs (official): Thumbnails, Icons. In the `Roblox/creator-docs` repo: `content/en-us/production/publishing/thumbnails.md` and `experience-icons.md` (repo state 2026-10-13). AUTHORITATIVE.
-- *Hud's Guide To Roblox Success*, chapter 07 (community observations, May–Oct 2026). USEFUL, community observation.
+- *Hud's Guide To Roblox Success*, chapter 07, especially "Show the core fantasy and loop" (community observations, May–Oct 2026). USEFUL, community observation.
+- This repo's `DEV_NOTES.md` and `handoffs/`, for what the game actually does (rolling growth, luck, guards, safe line, hatching). AUTHORITATIVE for this game.
 - Free-tier reports (third-party, figures conflict). UNVERIFIED:
   - [Rangy: Best Free AI Image Generators 2026](https://rangy.ai/blog/best-free-ai-image-generator/)
   - [Wireflow: 10 Tools Compared](https://www.wireflow.ai/blog/best-free-ai-image-generators-compared-in-2026)
