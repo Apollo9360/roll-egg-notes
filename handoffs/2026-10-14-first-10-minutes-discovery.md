@@ -3,7 +3,13 @@
 **Date:** 2026-10-14
 **From:** the cloud session that maintains the `roblox-dev/` vault. It cannot reach Studio.
 **To:** a local Claude Code session connected to Roblox Studio through MCP.
-**Branch:** `claude/stoic-lamport-jqadwi`.
+**Repo and branch:** https://github.com/apollo9360/roll-egg-notes, branch `claude/stoic-lamport-jqadwi`.
+- If your local clone lacks the branch: `git fetch origin claude/stoic-lamport-jqadwi`, then `git checkout claude/stoic-lamport-jqadwi`.
+- Commit locally; the user pushes from GitHub Desktop.
+
+**Files this request refers to** (read them only where a section asks):
+- `DEV_NOTES.md` (repo root): https://github.com/apollo9360/roll-egg-notes/blob/claude/stoic-lamport-jqadwi/DEV_NOTES.md. The copy in your local scratch workspace may be newer; use the newer one.
+- The first-minute handoff: https://github.com/apollo9360/roll-egg-notes/blob/claude/stoic-lamport-jqadwi/handoffs/2026-10-13-first-minute-polish.md
 
 ## Goal
 
@@ -29,7 +35,7 @@ The more exact numbers, paths, texts and screenshots you include, the better the
 
 ## How to deliver
 
-1. Write the report to `handoffs/2026-10-14-first-10-minutes-report.md` in this repo, using the section numbers below.
+1. Write the report to `handoffs/2026-10-14-first-10-minutes-report.md` in the repo above, using the section numbers below.
 2. Put screenshots in `handoffs/ftue-screenshots/`, named after the list in section 12.
 3. Commit and push to `claude/stoic-lamport-jqadwi`.
 4. Tell the user it's done, so they can tell the cloud session to read it.
