@@ -7,7 +7,7 @@ Notes and history from the Claude Code sessions that built **Roll and Steal an E
 | [DEV_NOTES.md](DEV_NOTES.md) | Every change made to the game, newest first, plus standing rules and open items. Start here. |
 | [handoffs/](handoffs/2026-10-13-first-minute-polish.md) | Handoff briefs for the next session/model (e.g. first-minute polish: HUGE EGG timer, biggest-egg board, onboarding funnel, shorter-feeling walk). |
 | [skills/roll-egg-art-direction/](skills/roll-egg-art-direction/SKILL.md) | The art-direction skill (measured Steal an Egg UI/world recipes). Copy into `~/.claude/skills/` to use it. |
-| [roblox-dev/](roblox-dev/) | The shared Roblox development knowledge vault: guides, checklists, recipes and context packs for people and AI agents. This vault is the project's memory: look things up here and add what you learn. |
+| [roblox-dev/](roblox-dev/00%20-%20Vault%20Navigation/START%20HERE.md) | The shared Roblox development knowledge vault: guides, checklists, recipes and context packs for people and AI agents. This vault is the project's memory: start at `00 - Vault Navigation/START HERE.md`, look things up here and add what you learn. |
 | [huds-guide/](huds-guide/Hud's%20Guide%20To%20Roblox%20Success.md) | *Hud's Guide To Roblox Success*: 404 linked notes on growing a Roblox game (analytics, algorithm, ads, thumbnails, retention, monetization, design, Studio tips). Imported from the Google Drive folder "Obsidian Vault - Huds Guide". Notes use `[[wikilinks]]`, so read them in Obsidian. |
 | `transcript/` | The full conversation, in three parts (`part1` oldest). Gzipped JSONL, one message per line; embedded screenshots were replaced by `<image removed>`. Unzip with 7-Zip or `gzip -d`. `metadata.json` = session info. |
 
