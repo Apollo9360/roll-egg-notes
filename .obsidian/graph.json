@@ -1,0 +1,119 @@
+{
+  "colorGroups": [
+    {
+      "query": "path:\"01 Contents and Playbook\"",
+      "color": {
+        "a": 1,
+        "rgb": 15158332
+      }
+    },
+    {
+      "query": "path:\"02 Analytics and Metrics\"",
+      "color": {
+        "a": 1,
+        "rgb": 15105570
+      }
+    },
+    {
+      "query": "path:\"03 Benchmarks and Typical Results\"",
+      "color": {
+        "a": 1,
+        "rgb": 15844367
+      }
+    },
+    {
+      "query": "path:\"04 Algorithm and Home Recommendations\"",
+      "color": {
+        "a": 1,
+        "rgb": 3066993
+      }
+    },
+    {
+      "query": "path:\"05 Age Gates and Highly Engaged Players\"",
+      "color": {
+        "a": 1,
+        "rgb": 1752220
+      }
+    },
+    {
+      "query": "path:\"06 Ads and Ad Credits\"",
+      "color": {
+        "a": 1,
+        "rgb": 3447003
+      }
+    },
+    {
+      "query": "path:\"07 Thumbnails and Icons\"",
+      "color": {
+        "a": 1,
+        "rgb": 10181046
+      }
+    },
+    {
+      "query": "path:\"08 Retention, Onboarding and Playtime\"",
+      "color": {
+        "a": 1,
+        "rgb": 15221651
+      }
+    },
+    {
+      "query": "path:\"09 Monetization\"",
+      "color": {
+        "a": 1,
+        "rgb": 52937
+      }
+    },
+    {
+      "query": "path:\"10 Game Design, Genres and Live Ops\"",
+      "color": {
+        "a": 1,
+        "rgb": 7101671
+      }
+    },
+    {
+      "query": "path:\"11 Marketing, Teams and Business\"",
+      "color": {
+        "a": 1,
+        "rgb": 16632686
+      }
+    },
+    {
+      "query": "path:\"12 Technical and Studio Tips\"",
+      "color": {
+        "a": 1,
+        "rgb": 5631940
+      }
+    },
+    {
+      "query": "path:\"13 Policy, Moderation and Account Safety\"",
+      "color": {
+        "a": 1,
+        "rgb": 16742005
+      }
+    },
+    {
+      "query": "path:\"14 Tools and Resources\"",
+      "color": {
+        "a": 1,
+        "rgb": 7649791
+      }
+    },
+    {
+      "query": "path:\"15 Debates, Myths and FAQ\"",
+      "color": {
+        "a": 1,
+        "rgb": 10656766
+      }
+    },
+    {
+      "query": "path:\"00 Concepts\"",
+      "color": {
+        "a": 1,
+        "rgb": 16777215
+      }
+    }
+  ],
+  "showTags": false,
+  "showAttachments": false,
+  "showOrphans": true
+}

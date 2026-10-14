@@ -5,6 +5,6 @@ desktop.ini
 # raw (uncompressed) transcripts: commit only the .jsonl.gz parts
 *.jsonl
 # Obsidian: share vault settings, not per-machine UI state
-.obsidian/workspace*.json
-.obsidian/cache
+**/.obsidian/workspace*.json
+**/.obsidian/cache
 .trash/
