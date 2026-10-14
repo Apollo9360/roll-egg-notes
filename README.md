@@ -4,11 +4,21 @@ Notes and history from the Claude Code sessions that built **Roll and Steal an E
 
 | Path | What it is |
 |---|---|
-| `DEV_NOTES.md` | Every change made to the game, newest first, plus standing rules and open items. Start here. |
-| `handoffs/` | Handoff briefs for the next session/model (e.g. first-minute polish: HUGE EGG timer, biggest-egg board, onboarding funnel, shorter-feeling walk). |
-| `skills/roll-egg-art-direction/` | The art-direction skill (measured Steal an Egg UI/world recipes). Copy into `~/.claude/skills/` to use it. |
-| `memory/` | Claude's memory notes about how to work on this project (no playtesting, Creator Hub is done by hand, UI lives in StarterGui...). |
+| [DEV_NOTES.md](DEV_NOTES.md) | Every change made to the game, newest first, plus standing rules and open items. Start here. |
+| [handoffs/](handoffs/2026-10-13-first-minute-polish.md) | Handoff briefs for the next session/model (e.g. first-minute polish: HUGE EGG timer, biggest-egg board, onboarding funnel, shorter-feeling walk). |
+| [skills/roll-egg-art-direction/](skills/roll-egg-art-direction/SKILL.md) | The art-direction skill (measured Steal an Egg UI/world recipes). Copy into `~/.claude/skills/` to use it. |
+| [memory/](memory/MEMORY.md) | Claude's memory notes about how to work on this project (no playtesting, Creator Hub is done by hand, UI lives in StarterGui...). |
 | `transcript/` | The full conversation, in three parts (`part1` oldest). Gzipped JSONL, one message per line; embedded screenshots were replaced by `<image removed>`. Unzip with 7-Zip or `gzip -d`. `metadata.json` = session info. |
+
+## Opening in Obsidian
+
+This folder is an Obsidian vault. In Obsidian choose **Open folder as vault** and pick this repo's folder. The `.obsidian/` settings come with it:
+
+- New links are written as relative markdown links, so they still work on GitHub.
+- `transcript/` is hidden from search and the graph (it is large, gzipped JSONL).
+- README, DEV_NOTES and the memory index are bookmarked.
+
+Your own layout (`.obsidian/workspace.json`) stays out of git.
 
 Not included: the game itself. Scripts live inside the Roblox place in Studio, not as files here.
 
