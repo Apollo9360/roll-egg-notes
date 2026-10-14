@@ -95,6 +95,16 @@ aliases: [AI playbook, Agent workflow, How AI should work on Roblox, Claude Robl
 - **Hand-offs:** for multi-session work, write a handoff in `handoffs/` with goals, state, open questions and exact paths.
 - **The vault:** when you learn something reusable (an engine quirk, a verified API behaviour, a better pattern), add or extend the right vault note, following [[CONTRIBUTING TO THE ROBLOX DEVELOPMENT VAULT]]. Then log structural changes in [[VAULT CHANGELOG]], and put open questions in [[Research Backlog]].
 
+## Writing a request for another agent
+
+Use this when one session hands work to another, for example from a cloud session to a local Studio-connected session. It is a team rule.
+
+- **Assume the builder knows nothing in the repo unless you point to it directly.** Give the exact path, plus a GitHub URL with the branch, for every file they must read. "The vault" or "the handoff" is not enough.
+- **Put what they need in the request itself.** Inline the facts, numbers and yardsticks they need. Don't make an external document (a PDF, an earlier audit, a long guide) the thing they must study. Describe the wanted output concretely: its sections, a filled-in example entry, and the labels to use.
+- **Say how to do the task, not just what.** Name the method: "build a fact base first", "launch one critic subagent per area with this prompt", "verify the top findings with a skeptic subagent". Give prompt templates for any subagents.
+- **State the rules and the stop point:** read-only or not, who approves playtests, what not to touch, where to write the output, and what to do when it's finished (commit, push, or hand back to the user).
+- **Make it robust to pasting.** Long requests get cut off when pasted. Keep the request in the repo and have the user paste one short line pointing to it.
+
 ## Anti-patterns
 
 - Coding before reading the existing systems, which produces duplicate managers, remotes and data paths.
