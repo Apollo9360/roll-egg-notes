@@ -14,6 +14,7 @@ Newest first. Record new notes, renames, removals and corrected facts ([[CONTRIB
 
 ## 2026-10-14
 
+- **Added:** [[Roblox Player Psychology Guidelines]] (from a community psychology deck; odds rules checked against the official paid random items page) and [[Roblox Player Psychology Checklist]] (a general checklist, plus a Roll and Steal an Egg! task list).
 - **Added:** [[Decision - CollectionService Tags vs Folders]] (with a TagBinder module), [[Recipe - Server Cooldown]] and [[Recipe - Notification Queue]]. All code type-checked.
 - **Navigation:** added [[START HERE]], four MOCs, [[Source Index]], [[Research Backlog]], this changelog and the contributing guide.
 - **Context packs:** Roblox Backend, Security, UI Development, Blender Modeling, R15 Animation, VFX, Optimization.

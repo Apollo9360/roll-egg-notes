@@ -64,7 +64,7 @@ Every external link cited in a note's Sources section, grouped by site, with the
 | [Export avatar animations from Maya (Import from FBX Animation steps)](https://create.roblox.com/docs/art/characters/export-avatar-animations-from-maya) | [[R15 Blender Animation Pipeline]] |
 | [Export settings](https://create.roblox.com/docs/art/modeling/export-requirements) | [[Blender Export Checklist]], [[Blender to Roblox Modeling Pipeline]] |
 | [External tools](https://create.roblox.com/docs/projects/external-tools) | [[Tooling and Workflow]] |
-| [Funnel events](https://create.roblox.com/docs/production/analytics/funnel-events) | [[Analytics and LiveOps Guide]] |
+| [Funnel events](https://create.roblox.com/docs/production/analytics/funnel-events) | [[Analytics and LiveOps Guide]], [[Roblox Player Psychology Guidelines]] |
 | [Gamepad input](https://create.roblox.com/docs/input/gamepad) | [[Controller UI Checklist]], [[Input Systems]] |
 | [General specifications](https://create.roblox.com/docs/art/modeling/specifications) | [[Blender Export Checklist]], [[Blender to Roblox Modeling Pipeline]], [[R15 Blender Animation Pipeline]] |
 | [Global lighting](https://create.roblox.com/docs/environment/lighting) | [[Lighting and Environment Guide]] |
@@ -104,7 +104,7 @@ Every external link cited in a note's Sources section, grouped by site, with the
 | [Network Simulator](https://create.roblox.com/docs/studio/network-simulator) | [[Testing and QA Guide]] |
 | [On-screen UI containers (ScreenInsets)](https://create.roblox.com/docs/ui/on-screen-containers) | [[Roblox UI Engineering Guide]] |
 | [Onboarding](https://create.roblox.com/docs/production/game-design/onboarding) | [[Game Design for Roblox]] |
-| [Paid random items](https://create.roblox.com/docs/production/monetization/paid-random-items) | [[Monetization Design]] |
+| [Paid random items](https://create.roblox.com/docs/production/monetization/paid-random-items) | [[Monetization Design]], [[Roblox Player Psychology Checklist]], [[Roblox Player Psychology Guidelines]] |
 | [Parallel Luau: server-side raycasting validation example](https://create.roblox.com/docs/scripting/multithreading) | [[Combat Systems Engineering]], [[NPC and AI Engineering]], [[Performance and Profiling Guide]] |
 | [Particle emitters](https://create.roblox.com/docs/effects/particle-emitters) | [[Decision - ParticleEmitter vs Beam vs Trail]], [[VFX Checklist]], [[VFX Production Guide]] |
 | [Parts](https://create.roblox.com/docs/parts) | [[Studio Modeling vs Blender]] |

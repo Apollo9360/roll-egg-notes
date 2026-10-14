@@ -21,6 +21,8 @@ Back to [[START HERE]].
 ### Game Design
 
 - [[Game Design for Roblox]]
+- [[Roblox Player Psychology Guidelines]] (first minute, retention hooks, pricing, RNG and pity, community)
+- [[Roblox Player Psychology Checklist]] (general checklist, plus a task list for Roll and Steal an Egg!)
 
 ### Monetization
 
