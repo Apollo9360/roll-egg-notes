@@ -1,0 +1,4 @@
+- [Roblox UI lives in StarterGui](roblox-ui-in-startergui.md) — menus built as real instances, controllers bind; screen_capture can't see ProximityPrompts
+- [Steal an Egg decomp reference](steal-an-egg-decomp-reference.md) — second Studio "test" place; screenshot/toggle UIs, restore after; look findings
+- [Creator Hub: user does it](creator-hub-user-does-it.md) — give a list of products/passes to create, paste returned IDs
+- [No playtesting](no-playtesting.md) — never start play; may STOP user's play to edit if no subagents run; live Client queries OK
