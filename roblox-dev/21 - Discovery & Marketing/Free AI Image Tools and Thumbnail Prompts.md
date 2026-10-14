@@ -17,6 +17,7 @@ How to make Roblox thumbnails, icons and item icons for free with AI tools, plus
 - Use free generators that accept **reference images**: Gemini (Nano Banana 2), Google Flow and ChatGPT.
 - Do layout and text yourself in **Photopea** or **Canva**.
 - **Every prompt sells the core fantasy** so the game is clear without its title: steal an egg, roll it home as it grows, and escape the guard ([[Show the core fantasy and loop]]).
+- **Every prompt uses the game's real cast:** the Mother Hen, River Croc and Canyon Scorpion guards, zone eggs, real pets, the gold SAFE ZONE line and the clover luck tag ([[#Our game's look and cast]]).
 - Test 10–25 distinct thumbnails in ads before choosing the 2–5 for the home page.
 
 The strategy is in [[Thumbnails and Icons]] (Hud's Guide, chapter 07). This note covers tools and prompts only.
@@ -92,12 +93,15 @@ Community-reported, not in the docs:
 Paste this after each concept so every image matches the game:
 
 ```
-Style: Roblox game thumbnail, bright saturated toy-brick world, chunky studded plastic surfaces,
-voxel-style pets and eggs that glow by rarity, cartoon 3D render with soft lighting, bold clean
-shapes, high contrast between subject and a simple background, thick dark outlines around main
-subjects, 16:9 landscape. Keep the bottom 15% of the image free of important details. No text,
-no logos, no watermark, no UI, no Robux symbol.
+Style: Roblox game thumbnail, bright saturated toy-brick world, chunky studded plastic floors
+with a faint checker pattern, blocky Minecraft-like trees, chunky low-poly creatures and glossy
+eggs that glow by rarity, cartoon 3D render with soft lighting and soft shadows, bold clean
+shapes, playful cartoon proportions, high contrast between subject and a simple background,
+thick dark outlines around main subjects, 16:9 landscape. Keep the bottom 15% of the image free
+of important details. No text, no logos, no watermark, no UI, no Robux symbol.
 ```
+
+The floors, trees and colours match the current build (see [[#Our game's look and cast]]).
 
 ### Avatar block
 
@@ -140,16 +144,75 @@ Taken from this repo's `DEV_NOTES.md`:
 - AI-invented monsters that aren't in the game cause the expectation gap described in [[Honesty vs clickbait]].
 - Confirm with one screenshot that the rolled egg really sits on the ground in front of the player, and adjust "pushing" to match the in-game pose.
 
-### Fantasy block
+## Our game's look and cast
+
+Use these names, colours and details in prompts instead of "a guard monster" or "a rare pet". They come from the game's config modules (`Shared.Config.Biomes`, `Pets`, `EggVariants`), `DEV_NOTES.md`, the art-direction file `KEY_VISUALS.md`, and a Studio screenshot of the lobby, all as of 2026-10-13. They were **not** inspected live in Studio; re-check against the place before a final batch.
+
+> [!warning] Guards and pets are still placeholders in the build
+> DEV_NOTES "Open items" lists "low-poly meshes for guards, pets and the carried egg" as not done. The hen, croc and scorpion below are the **designed** look from `KEY_VISUALS.md`. Ship thumbnails that show them only once the in-game models match. Until then, a thumbnail showing a fluffy Mother Hen over a block-shaped guard is the expectation gap from [[Honesty vs clickbait]].
+
+### Zones, guards and eggs
+
+Zones unlock in order as Speed grows. The guard sleeps by its nest and wakes ("!!") when an egg is taken.
+
+| Zone | Floor colour (RGB) | Zone accent | Guard | Guard look | Egg look |
+|---|---|---|---|---|---|
+| **Meadow** (start) | Grass green 63,165,0 | Sunny yellow | **Mother Hen** | Big fluffy white hen; angry, feathers puffed up when awake | Cream with yellow spots |
+| **Riverbank** (300 Speed) | Teal green 30,160,70 | Sky cyan | **River Croc** | Big green crocodile, long and low, with a lily pad on its head | Blue with white wave stripes |
+| **Canyon** (8,000 Speed) | Sandstone orange 214,146,52 | Ember orange | **Canyon Scorpion** | Chunky rust-red scorpion | Terracotta with cracked-clay lines |
+
+Planned future zones (not in the game; don't show them yet): Snow (Yeti), Volcano (Magma Golem), Cosmic (Star Whale).
+
+**Egg variants** (any zone; rarer ones start bigger, grow bigger and carry more luck):
+
+| Variant | Chance | Look |
+|---|---|---|
+| Plain | 44% | Zone colours |
+| Speckled | 22% | Tinted speckles |
+| Spotted | 14% | Pebble texture |
+| Marbled | 10% | Marble texture |
+| Shiny | 6% | Glassy, glowing |
+| **Golden** | 3% | Gold foil, glowing |
+| **Rainbow** | 1% | Colours cycling through the rainbow, glowing |
+
+A Rainbow or Golden egg is honest as the "hero" egg: it exists, it is rare, and it is the one players chase.
+
+### Pets (what hatches)
+
+| Zone | Common | Uncommon | Rare | Epic | Top |
+|---|---|---|---|---|---|
+| Meadow | Chick, Bunny | Lamb | Fox | **Owl** (brown) | **Golden Goose** (Legendary) |
+| Riverbank | Duckling, Frog | Otter | Beaver | Heron | **Swan Queen** (Legendary) |
+| Canyon | Lizard, Roadrunner | Armadillo | Coyote | Vulture | **Thunderbird** (Mythic) |
+
+- **Every new player's first egg hatches an Epic Owl**, so the Owl is the most honest "first payoff" pet to show.
+- Dream-pet looks from `KEY_VISUALS.md`:
+  - **Golden Goose:** plump, polished gold, smug half-closed eyes, one curled crown feather.
+  - **Swan Queen:** white swan, a crown of floating water droplets, a long tail like a ball gown.
+  - **Thunderbird:** cyan-and-gold eagle with zigzag feathers and lightning crackling at the wing tips.
+- Secret pets (Eggbert, Lilypad Leviathan, Sunstone Sphinx) are **design ideas only**; leave them out until they ship.
+
+### Things players see that make a scene read as this game
+
+- **The egg billboard** above a rolled egg: its weight in kg on top, then a **green four-leaf clover** and a luck number such as **x1.50**. It ticks up as the egg grows. This is the cleanest piece of real UI to add to a thumbnail by hand.
+- **The gold SAFE ZONE line** on the ground: the guards stop there. Shown with the words "SAFE ZONE" on the Meadow floor.
+- **The lobby:** a bright green studded floor, a giant golden egg statue on a cream pedestal, terracotta walls with lime trims, plots around a central plaza, the "Biggest egg today" board and the "NEW EGGS IN 5:00" egg reset.
+- **Plots:** placed eggs incubate with a countdown, then hatch into pets that earn cash per second.
+- **Night:** eggs and the world go blue-lit at night.
+- **HUD numbers:** speed in cyan, money in bright green, both in chunky italic text with a dark outline (Rubik Bold Italic). Don't put HUD panels in thumbnails, but the same text style works for added numbers.
+
+## Fantasy block
 
 Paste this into every prompt, before the style block:
 
 ```
-Core idea the image must show at a glance: the player has just stolen an egg from a guarded nest
-and is ROLLING it home along the ground like a giant snowball. The egg grows bigger with every
-step and is already much bigger than the player. A guard monster is chasing them. The player is
-winning: fast, excited, just out of reach.
+Core idea the image must show at a glance: the player has just stolen an egg from a nest guarded
+by a giant animal and is ROLLING it home along the ground like a giant snowball. The egg grows
+bigger with every step and is already much bigger than the player. The angry guardian animal is
+chasing them. The player is winning: fast, excited, just out of reach.
 ```
+
+Then name the zone's real guard and egg in the concept itself, for example "a huge fluffy white mother hen" with "a cream egg with yellow spots".
 
 ## Thumbnail prompts for Roll and Steal an Egg!
 
@@ -159,54 +222,62 @@ The concepts below are distinct, so they test as different thumbnails, but they 
 ```
 Low camera, the Roblox avatar sprinting toward the camera while pushing a gigantic glowing
 rainbow egg that rolls on the ground in front of them; the egg is twice the avatar's height and
-leaves a trail of dust and sparkles behind it. Right behind them a huge angry guard monster
-lunges with arms out but is just out of reach. Far in the background, a tiny nest with small
-plain eggs. Bright green studded grass, plain blue sky. The egg is the biggest, brightest thing
-in the frame. [fantasy block] [style block] [avatar block]
+leaves a trail of dust and sparkles behind it. Right behind them a huge fluffy white mother hen,
+feathers puffed up and eyes furious, lunges with wings spread but is just out of reach. Far in
+the background, a straw nest with small cream eggs with yellow spots. Bright green studded
+grass, blocky trees, plain blue sky. The egg is the biggest, brightest thing in the frame.
+[fantasy block] [style block] [avatar block]
 ```
+Optional text: the egg's clover luck tag, for example a green four-leaf clover and "x4.80".
 
 **2. The snowball trail** (growth told without words)
 ```
-High three-quarter view of one curving path from a nest in the far background to the
-foreground. Along the path the SAME egg appears three times, growing: tiny at the nest, medium
-halfway, enormous in the foreground where the avatar is pushing it and grinning. A guard monster
-stands at the nest end, shaking its fists. Simple bright meadow, path clearly visible.
+High three-quarter view of one curving path through a bright green meadow, from a straw nest in
+the far background to the foreground. Along the path the SAME cream egg with yellow spots
+appears three times, growing: tiny at the nest, medium halfway, enormous in the foreground
+where the avatar is pushing it and grinning. A fluffy white mother hen stands at the nest,
+flapping angrily. Path clearly visible, simple blocky trees.
 [fantasy block] [style block] [avatar block]
 ```
-Optional text: "1 STEP" by the tiny egg and "1,000 STEPS" by the giant one.
+Optional text: "x1.00" by the tiny egg and "x4.80" by the giant one, each with the clover icon.
 
 **3. Small egg vs giant egg** (before/after; sells "bigger = rarer")
 ```
 Split-screen, same avatar on both sides. Left (dull grey background): the avatar rolls a tiny
-plain egg, and a plain little chick pops out; the avatar shrugs. Right (bright golden
-background): the avatar rolls an enormous rainbow egg bigger than a house, and a glowing
-legendary pet bursts out of it with light rays; the avatar cheers. Thick black divider.
+plain cream egg, and a plain little yellow chick pops out; the avatar shrugs. Right (bright
+golden background): the avatar rolls an enormous glowing golden egg bigger than a house, and a
+plump golden goose made of polished gold, with smug half-closed eyes and a curled crown
+feather, bursts out of it with light rays; the avatar cheers. Thick black divider.
 [fantasy block] [style block] [avatar block]
 ```
-Optional text, using the real in-game clover icon: "x1 LUCK" vs "x1,000 LUCK", or "TINY" vs "GIANT".
+Optional text, using the real clover icon: "x1 LUCK" vs "x1,000 LUCK", or "TINY" vs "GIANT".
 
 **4. Across the safe line** (the close call; the stealing thrill)
 ```
-Side-on action shot: the avatar and their giant rolling egg are mid-leap across a glowing gold
-line painted on the ground. The guard monster skids to a stop exactly at the line, its hand
-inches from the egg, furious. The avatar looks back laughing. Clean bright grass on the safe
-side, darker grass on the guard's side. [fantasy block] [style block] [avatar block]
+Side-on action shot at a teal-green riverbank: the avatar and their giant blue egg with white
+wave stripes are mid-leap across a glowing gold line painted on the ground. A big green
+crocodile with a lily pad on its head skids to a stop exactly at the line, jaws open inches
+from the egg, furious. The avatar looks back laughing. Bright clean ground on the safe side,
+reeds and water on the crocodile's side. [fantasy block] [style block] [avatar block]
 ```
+Optional text: "SAFE ZONE" on the line, as it reads in the game.
 
 **5. Bigger than everything** (oversell the power fantasy)
 ```
-Wide shot: the avatar pushes an egg so enormous it towers over trees and fences, rolling it out
-of a canyon nest area, while a now-tiny guard monster runs away from the egg in panic. Dust,
-motion lines, sparkles. The avatar is small but clearly in control and smiling. Bright orange
-canyon, blue sky. [fantasy block] [style block] [avatar block]
+Wide shot in a sandstone-orange canyon: the avatar pushes a terracotta egg with cracked-clay
+lines so enormous it towers over mesas and cacti, rolling it away from a nest, while a chunky
+rust-red scorpion, now tiny next to the egg, scuttles away from it in panic. Dust, motion
+lines, sparkles. The avatar is small but clearly in control and smiling. Blue sky.
+[fantasy block] [style block] [avatar block]
 ```
 
 **6. Day 1 vs Day 100** (progression: weak but winning, then overpowered)
 ```
-Split-screen. Left, "Day 1": the avatar rolls a pebble-sized egg away from a small sleepy guard
-in a green meadow, looking proud. Right, "Day 100": the same avatar, now with a glowing trail,
-rolls a gigantic shining egg out of a dramatic canyon while a giant guard falls behind in the
-dust. A rare glowing pet follows the avatar. Same avatar, same art style.
+Split-screen. Left, "Day 1": the avatar rolls a pebble-sized cream egg away from a small sleepy
+white hen in a green meadow, looking proud. Right, "Day 100": the same avatar, now with a
+glowing trail, rolls a gigantic shining rainbow egg out of a dramatic orange canyon while a
+giant rust-red scorpion falls behind in the dust. A cyan-and-gold thunderbird with lightning
+crackling at its wing tips flies beside the avatar. Same avatar, same art style.
 [fantasy block] [style block] [avatar block]
 ```
 Add the text "DAY 1" and "DAY 100" yourself, in a thick, simple font.
@@ -214,44 +285,65 @@ Add the text "DAY 1" and "DAY 100" yourself, in a thick, simple font.
 **7. Over-the-shoulder steal** (puts the player in the action)
 ```
 Over-the-shoulder view from just behind the avatar's head: both blocky hands pushing a huge
-glowing egg forward down a bright path toward a gold safe line in the distance. In the
-corner of the frame, a guard monster's hand reaches in from behind, almost touching the avatar.
-Sense of speed. [fantasy block] [style block]
+glowing golden egg forward down a bright green meadow path toward a glowing gold line in the
+distance. In the corner of the frame, a fluffy white hen's wing and furious eye reach in from
+behind, almost touching the avatar. Sense of speed. [fantasy block] [style block]
 ```
 
 **8. The hatch payoff, with the steal still visible**
 ```
-Foreground: a giant egg cracking open with golden light rays and a rare glowing voxel owl
-bursting out, wings spread; the avatar cheers next to it with both arms up. Background, small
-but clear: the guard monster at the edge of the meadow, sulking, and the long trail in the grass
-where the egg was rolled. [fantasy block] [style block] [avatar block]
+Foreground: a giant egg cracking open on a farm plot with golden light rays, and a round brown
+cartoon owl bursting out, wings spread; the avatar cheers next to it with both arms up.
+Background, small but clear: the white mother hen at the edge of the meadow, sulking, and the
+long trail in the grass where the egg was rolled. [fantasy block] [style block] [avatar block]
 ```
-Use the Owl as it looks in the game; it is Meadow's real Epic pet.
+The Owl is honest here: every player's first egg hatches an Epic Owl. Attach its in-game look.
 
 **9. Shocked face** (meme-style; cheap to test)
 ```
 Extreme close-up of the avatar's shocked, delighted face, mouth wide open, as the gigantic
-rainbow egg they are rolling looms over them, filling the top half of the frame. A tiny guard
-monster is visible in the gap between them, chasing. Plain bright red background.
+rainbow egg they are rolling looms over them, filling the top half of the frame. A tiny angry
+white hen is visible in the gap between them, chasing. Plain bright red background.
 [fantasy block] [style block] [avatar block]
 ```
 
 **10. Girl set** (run it next to a boy set)
 ```
 Same composition as concept 1, but the avatar is a girl Roblox avatar with pink hair and a pink
-outfit, rolling a giant pastel-pink sparkly egg away from a silly-looking guard monster.
-[fantasy block] [style block]
+outfit, rolling a giant sparkly rainbow egg away from a silly-looking, flustered white mother
+hen. [fantasy block] [style block]
 ```
 
-**11. Studio scene, enhanced** (most honest; uses your real build)
+**11. The wake-up** (tension before the chase)
 ```
-[Attach a Studio screenshot of your avatar rolling a big egg away from a guard in the Meadow.]
+Extreme low angle in an orange sandstone canyon. A giant chunky rust-red scorpion sleeps curled
+around a straw nest of terracotta eggs, with "Zzz" curls above it and one eye just cracking
+open. A tiny avatar tiptoes toward the eggs in the foreground, already reaching for the biggest
+one. Mesas and cacti behind, warm sunset rim light, tension and comedy.
+[fantasy block] [style block] [avatar block]
+```
+Optional text: a red "!!" over the scorpion, as the guards show when they wake.
+
+**12. Studio scene, enhanced** (most honest; uses your real build)
+```
+[Attach a Studio screenshot of your avatar rolling a big egg away from the Mother Hen in the
+Meadow, with the clover luck tag visible above the egg.]
 Turn this exact scene into a polished cartoon thumbnail. Keep the egg, guard, avatar and colors.
 Make the egg 2x bigger, move the avatar and egg closer to the camera, add motion lines and a
 dust trail behind the rolling egg, give the avatar an excited face, simplify the background into
 flat bright shapes, and add thick dark outlines around the avatar, egg and guard.
 [fantasy block] [style block]
 ```
+
+**13. The plaza** (social; the "join friends" angle, for the detail page)
+```
+High three-quarter view of a cheerful lobby on a bright green studded floor: a giant golden egg
+statue on a cream pedestal in the middle, fenced farm plots around it with eggs incubating and
+cartoon pets standing beside them, terracotta walls with lime-green trims. Several Roblox
+avatars roll big colourful eggs in from an arched gate. Beyond the gate, green, teal and orange
+zones in the distance. [style block] [avatar block]
+```
+This one doesn't show the chase, so use it on the detail page or as a secondary test, not as the main home thumbnail.
 
 ### The 100-pixel test, for every candidate
 
@@ -265,7 +357,8 @@ Shrink each image to about 100 px wide and ask someone who hasn't seen the game,
 ### Text on the image
 
 Text is optional ([[Composition, contrast and text]]). If you add it:
-- Use at most a few words: STEAL · ROLL · GIANT, "1 STEP / 1,000 STEPS", "x1 vs x1,000 LUCK".
+- Use at most a few words: STEAL · ROLL · GIANT, "SAFE ZONE", "x1 vs x1,000 LUCK".
+- The clover plus "xN.NN" is real in-game UI, so it is honest and recognisable to players who have played.
 - Add it yourself, in a thick, outlined font.
 - Never use the game title or a logo.
 - Test a no-text version of every winner.
@@ -289,6 +382,7 @@ Use these after a thumbnail wins, one change at a time:
 - `Same image, but add a dust and sparkle trail behind the rolling egg.`
 - `Same image, but the egg is diamond-blue instead of gold, so it stands out from everything else.`
 - `Same image, but the guard is closer, almost touching the avatar.`
+- `Same image, but in the Riverbank: teal ground, a blue wave-striped egg, and a green crocodile with a lily pad on its head.`
 - `Same image, but swap the background to a flat bright color and remove all clutter.`
 - `Same image, mirrored, with the avatar rolling left to right.`
 - `Same image, no text version` (to test against the version with text).
@@ -315,16 +409,17 @@ Solid bright blue background, thick black outlines. Readable at 150x150 pixels. 
 
 **Icon B, the close call:**
 ```
-Square game icon. The avatar's excited face in the foreground and their giant rolling egg
-beside them, with a guard monster's hand reaching in from the corner, almost touching the egg.
+Square game icon. The avatar's excited face in the foreground and their giant rolling golden
+egg beside them, with a furious fluffy white hen's wing reaching in from the corner, almost
+touching the egg.
 Bold colors, strong contrast, solid orange background. No text. [avatar block]
 ```
 
 **Icon C, the snowball egg:**
 ```
-Square game icon. One huge rolling egg with motion lines and a short trail of smaller "ghost"
-eggs behind it showing that it grew, a tiny avatar pushing it, bright meadow-green background,
-chunky studded shell. No text. [avatar block]
+Square game icon. One huge cream egg with yellow spots, rolling, with motion lines and a short
+trail of smaller "ghost" eggs behind it showing that it grew, a tiny avatar pushing it, bright
+meadow-green studded background. No text. [avatar block]
 ```
 
 Optional number badge: add short text like "1M" in Photopea, not with the AI.
@@ -334,7 +429,7 @@ Optional number badge: add short text like "1M" in Photopea, not with the AI.
 Use these for shop, eggs, currency and Robux products. Generate them as a matched set:
 
 ```
-2D game UI icon, front view, of [a golden egg with a crown pattern], chunky cartoon style, bold
+2D game UI icon, front view, of [a glowing golden egg], chunky cartoon style, bold
 black outline, simple 3-tone shading with a white highlight, centered, transparent background
 (or plain flat magenta background for easy removal), consistent with a set of Roblox simulator
 shop icons. No text.
@@ -343,7 +438,7 @@ shop icons. No text.
 Swap the bracketed item for each icon:
 - `a stack of green cash`
 - `a running shoe with speed lines`
-- `a spinning prize wheel`
+- `a hamster wheel`
 - `a cracked egg with a pet peeking out`
 - `a lucky four-leaf clover`
 - `an hourglass for instant hatch`
@@ -360,6 +455,7 @@ For an existing set's look, attach two or three of your current icons and add: `
 
 - [ ] At least 10 truly different concepts, not 10 colour swaps of one.
 - [ ] Every thumbnail passes the 100-pixel test: a stranger can tell you to steal an egg and roll it home as it grows, with no title.
+- [ ] Guards, eggs and pets are the real cast (Mother Hen, River Croc, Canyon Scorpion; zone eggs; real pets), and the in-game models match what the thumbnail shows.
 - [ ] Every thumbnail shows the **real** loop (steal, roll and grow, escape, hatch) with real in-game eggs, guards and pets. Ad CTR that doesn't carry over to home PTR usually means clickbait.
 - [ ] Readable at about 100 px; the subject is larger than any background object.
 - [ ] Nothing important in the bottom 15%.
@@ -385,6 +481,7 @@ For an existing set's look, attach two or three of your current icons and add: `
 - Roblox creator docs (official): Thumbnails, Icons. In the `Roblox/creator-docs` repo: `content/en-us/production/publishing/thumbnails.md` and `experience-icons.md` (repo state 2026-10-13). AUTHORITATIVE.
 - *Hud's Guide To Roblox Success*, chapter 07, especially "Show the core fantasy and loop" (community observations, May–Oct 2026). USEFUL, community observation.
 - This repo's `DEV_NOTES.md` and `handoffs/`, for what the game actually does (rolling growth, luck, guards, safe line, hatching). AUTHORITATIVE for this game.
+- The game's config modules `Shared.Config.Biomes`, `Pets` and `EggVariants`, the art-direction file `KEY_VISUALS.md`, and a Studio lobby screenshot, as captured in this repo's session transcripts (2026-10-11 to 2026-10-13). Not inspected live in Studio. PROJECT-VERIFIED, may be out of date.
 - Free-tier reports (third-party, figures conflict). UNVERIFIED:
   - [Rangy: Best Free AI Image Generators 2026](https://rangy.ai/blog/best-free-ai-image-generator/)
   - [Wireflow: 10 Tools Compared](https://www.wireflow.ai/blog/best-free-ai-image-generators-compared-in-2026)
