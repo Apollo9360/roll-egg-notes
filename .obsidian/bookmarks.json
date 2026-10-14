@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "type": "file",
+      "ctime": 0,
+      "path": "README.md",
+      "title": "Start here"
+    },
+    {
+      "type": "file",
+      "ctime": 0,
+      "path": "DEV_NOTES.md"
+    },
+    {
+      "type": "file",
+      "ctime": 0,
+      "path": "memory/MEMORY.md",
+      "title": "Memory index"
+    },
+    {
+      "type": "file",
+      "ctime": 0,
+      "path": "huds-guide/Hud's Guide To Roblox Success.md",
+      "title": "Hud's Guide"
+    }
+  ]
+}
