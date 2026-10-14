@@ -14,6 +14,7 @@ Newest first. Record new notes, renames, removals and corrected facts ([[CONTRIB
 
 ## 2026-10-14
 
+- **Added:** [[Decision - CollectionService Tags vs Folders]] (with a TagBinder module), [[Recipe - Server Cooldown]] and [[Recipe - Notification Queue]]. All code type-checked.
 - **Navigation:** added [[START HERE]], four MOCs, [[Source Index]], [[Research Backlog]], this changelog and the contributing guide.
 - **Context packs:** Roblox Backend, Security, UI Development, Blender Modeling, R15 Animation, VFX, Optimization.
 - **Quick reference:** [[AI Roblox Development Playbook]], 11 decision guides and 18 checklists.

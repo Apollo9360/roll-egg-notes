@@ -70,8 +70,10 @@ Back to [[START HERE]].
 ### Recipes
 
 - [[Recipe - Object Pool]]
+- [[Recipe - Notification Queue]]
 - [[Recipe - Player Data with ProfileStore]]
 - [[Recipe - Secure Remote Handler]]
+- [[Recipe - Server Cooldown]]
 - [[Recipe - UI Modal Manager and Button Feedback]]
 
 ### Code Patterns

@@ -35,6 +35,7 @@ Back to [[START HERE]].
 ### Decision Guides
 
 - [[Decision - Attributes vs ValueObjects vs Tables]]
+- [[Decision - CollectionService Tags vs Folders]]
 - [[Decision - DataStore vs MemoryStore]]
 - [[Decision - Humanoid vs Custom NPC Controller]]
 - [[Decision - LocalScript vs Script]]
