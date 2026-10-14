@@ -64,6 +64,7 @@ Back to [[START HERE]].
 - [[R15 Animation Checklist]]
 - [[Release Checklist]]
 - [[Remote Security Checklist]]
+- [[Roblox Player Psychology Checklist]]
 - [[Roblox Development Golden Rules]]
 - [[UI Checklist]]
 - [[VFX Checklist]]
