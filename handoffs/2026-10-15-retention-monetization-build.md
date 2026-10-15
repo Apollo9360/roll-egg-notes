@@ -52,7 +52,7 @@ Why the StreamingEnabled note matters here: the freebie egg sits on a plot and t
 | UI engineering guide | https://github.com/Apollo9360/roll-egg-notes/blob/main/roblox-dev/07%20-%20UI%20UX/Roblox%20UI%20Engineering%20Guide.md | anyone touching UI |
 | Notification queue recipe | https://github.com/Apollo9360/roll-egg-notes/blob/main/roblox-dev/28%20-%20Recipes/Recipe%20-%20Notification%20Queue.md | features 2, 3, 4 (toasts and popups) |
 
-**Reference screenshots** are on the branch in `handoffs/2026-10-15-refs/`. They come from **other games**, so use them for look and layout only and copy no assets:
+**Reference screenshots** are on the branch in `handoffs/2026-10-15-refs/`. They come from **other games**, so use them for look and layout only and copy nothing from them. Assets come from the open-use check (section 3, Step A0) or from the game's own assets:
 
 | File | What it shows |
 |---|---|
@@ -246,6 +246,425 @@ The HUD also shows a corner offer, "STARTER PACK! ONLY 9 R$".
 
 ## 3. Method (director)
 
+### Step A0: open-use asset check (run once, before Step A)
+
+Run this first, so builders know which reference images, sounds and meshes they may use. It's the only edit allowed before the user's decisions: it creates the folder `ServerStorage.OpenUseAssets`.
+
+**How it works:**
+- `ContentProvider:PreloadAsync` reports `Success` for an asset only if **this place** may load it, so run the scripts in **our place** (122907972658396).
+- Each script scans the reference folders in `ServerStorage` (`REFERENCE_*`, `Quarantine`, `Snapshots_*`, `W1_Backups`) for asset ids, de-duplicates them, and checks them in batches of 50.
+  - It reads `ImageLabel.Image`, `Decal.Texture`, `Sound.SoundId`, `MeshPart.MeshId` and the like.
+  - Failed, timed-out and unanswered loads count as **not usable**.
+- **The decomp Studio** ("test") is a different place, so a check there says nothing about ours.
+  1. In that Studio, run each script with `COLLECT_ONLY = true`. It only prints `EXTRA_IDS = {…}`.
+  2. Paste that list into `EXTRA_IDS` in the same script in our place, and run it there.
+- **Ids in script source** (e.g. `"rbxassetid://123"` in code) aren't scanned. If you need them, find them with `script_grep` for `rbxassetid` and add them to `EXTRA_IDS` of the matching script.
+
+**The three commands:**
+1. **Images:** each open-use image gets a Decal in **`ServerStorage.OpenUseAssets.Images`**.
+   - The Decal is named `<source name>_<id>`.
+   - It carries an `AssetId` attribute and a `UsedBy` attribute listing where the image was found.
+   - The reference folders stay untouched. Re-running skips ids already in the folder.
+2. **Sounds:** prints the open-use ids as a ready Luau list, each with where it was found, and warns the rest.
+3. **Meshes:** the same as sounds, for meshes.
+
+**After running:** paste the printed lists (open-use sounds and meshes, and the counts for all three) into the audit file. Builders pick icons and sounds from those lists or the Images folder first, for example:
+- reward tiles and pack icons;
+- the popup's sounds;
+- the leave overlay's pulse.
+
+<details><summary>1. Images (command bar)</summary>
+
+```lua
+-- OPEN-USE CHECK: IMAGES. Paste into the Studio command bar of OUR place (122907972658396).
+-- Finds every image id in the reference folders, asks Roblox whether this place may load it,
+-- and puts one Decal per open-use id into ServerStorage.OpenUseAssets.Images.
+-- In the decomp Studio, set COLLECT_ONLY = true: it only prints the ids; paste them into EXTRA_IDS here.
+local COLLECT_ONLY = false
+local EXTRA_IDS = {} -- e.g. {"118694371557807", 123456789}
+local BATCH = 50
+
+local ServerStorage = game:GetService("ServerStorage")
+local ContentProvider = game:GetService("ContentProvider")
+
+local PROPS: { [string]: { string } } = {
+	Decal = { "Texture" },
+	Texture = { "Texture" },
+	ImageLabel = { "Image" },
+	ImageButton = { "Image", "HoverImage", "PressedImage" },
+	ParticleEmitter = { "Texture" },
+	Beam = { "Texture" },
+	Trail = { "Texture" },
+	MeshPart = { "TextureID" },
+	SpecialMesh = { "TextureId" },
+	Sky = { "SkyboxBk", "SkyboxDn", "SkyboxFt", "SkyboxLf", "SkyboxRt", "SkyboxUp", "SunTextureId", "MoonTextureId" },
+	Shirt = { "ShirtTemplate" },
+	Pants = { "PantsTemplate" },
+	ShirtGraphic = { "Graphic" },
+}
+
+local function idOf(value: any): string?
+	if typeof(value) ~= "string" then
+		return nil
+	end
+	return value:match("rbxassetid://(%d+)") or value:match("[?&]id=(%d+)")
+end
+
+local roots: { Instance } = {}
+if COLLECT_ONLY then
+	roots = { game }
+else
+	for _, child in ServerStorage:GetChildren() do
+		local n = child.Name
+		if n:match("^REFERENCE_") or n == "Quarantine" or n:match("^Snapshots_") or n == "W1_Backups" then
+			table.insert(roots, child)
+		end
+	end
+end
+
+local usedBy: { [string]: { string } } = {}
+local function add(id: string, where: string)
+	local list = usedBy[id]
+	if not list then
+		list = {}
+		usedBy[id] = list
+	end
+	if #list < 5 then
+		table.insert(list, where)
+	end
+end
+
+for _, root in roots do
+	local ok, all = pcall(root.GetDescendants, root)
+	if ok then
+		for _, inst in all do
+			local props = PROPS[inst.ClassName]
+			if props then
+				for _, prop in props do
+					local okRead, value = pcall(function()
+						return (inst :: any)[prop]
+					end)
+					local id = if okRead then idOf(value) else nil
+					if id then
+						add(id, inst:GetFullName() .. "." .. prop)
+					end
+				end
+			end
+		end
+	end
+end
+for _, id in EXTRA_IDS do
+	add(tostring(id), "EXTRA_IDS")
+end
+
+local ids: { string } = {}
+for id in usedBy do
+	table.insert(ids, id)
+end
+table.sort(ids)
+print(("[images] %d unique ids found"):format(#ids))
+
+if COLLECT_ONLY then
+	print("EXTRA_IDS = {" .. table.concat(ids, ", ") .. "}")
+else
+	local status: { [string]: string } = {}
+	for i = 1, #ids, BATCH do
+		local probes = {}
+		for j = i, math.min(i + BATCH - 1, #ids) do
+			local probe = Instance.new("Decal")
+			probe.Texture = "rbxassetid://" .. ids[j]
+			table.insert(probes, probe)
+		end
+		ContentProvider:PreloadAsync(probes, function(contentId: string, fetchStatus: Enum.AssetFetchStatus)
+			local id = idOf(contentId)
+			if id then
+				status[id] = fetchStatus.Name
+			end
+		end)
+		for _, probe in probes do
+			probe:Destroy()
+		end
+		print(("[images] checked %d/%d"):format(math.min(i + BATCH - 1, #ids), #ids))
+	end
+
+	local out: Instance = ServerStorage:FindFirstChild("OpenUseAssets") or Instance.new("Folder")
+	out.Name = "OpenUseAssets"
+	out.Parent = ServerStorage
+	local folder: Instance = out:FindFirstChild("Images") or Instance.new("Folder")
+	folder.Name = "Images"
+	folder.Parent = out
+	local have: { [string]: boolean } = {}
+	for _, child in folder:GetChildren() do
+		local existing = child:GetAttribute("AssetId")
+		if typeof(existing) == "string" then
+			have[existing] = true
+		end
+	end
+
+	local open: { string } = {}
+	local blocked: { string } = {}
+	for _, id in ids do
+		if status[id] == "Success" then
+			table.insert(open, id)
+			if not have[id] then
+				local source = usedBy[id][1]
+				local decal = Instance.new("Decal")
+				decal.Name = (source:match("([%w_ ]+)%.[%w]+$") or "Image") .. "_" .. id
+				decal.Texture = "rbxassetid://" .. id
+				decal:SetAttribute("AssetId", id)
+				decal:SetAttribute("UsedBy", table.concat(usedBy[id], "\n"))
+				decal.Parent = folder
+			end
+		else
+			table.insert(blocked, id .. " (" .. (status[id] or "no result") .. ")")
+		end
+	end
+	print(("[images] OPEN USE %d -> ServerStorage.OpenUseAssets.Images"):format(#open))
+	warn(("[images] NOT USABLE %d: %s"):format(#blocked, table.concat(blocked, ", ")))
+end
+```
+
+</details>
+
+<details><summary>2. Sounds (command bar)</summary>
+
+```lua
+-- OPEN-USE CHECK: SOUNDS. Paste into the Studio command bar of OUR place (122907972658396).
+-- Finds every sound id in the reference folders and asks Roblox whether this place may load it.
+-- Prints the open-use ids as a Luau list (with where each was found) and warns the rest.
+-- In the decomp Studio, set COLLECT_ONLY = true: it only prints the ids; paste them into EXTRA_IDS here.
+local COLLECT_ONLY = false
+local EXTRA_IDS = {} -- e.g. {"118694371557807", 123456789}
+local BATCH = 50
+
+local ServerStorage = game:GetService("ServerStorage")
+local ContentProvider = game:GetService("ContentProvider")
+
+local PROPS: { [string]: { string } } = {
+	Sound = { "SoundId" },
+	AudioPlayer = { "Asset" },
+}
+
+local function idOf(value: any): string?
+	if typeof(value) ~= "string" then
+		return nil
+	end
+	return value:match("rbxassetid://(%d+)") or value:match("[?&]id=(%d+)")
+end
+
+local roots: { Instance } = {}
+if COLLECT_ONLY then
+	roots = { game }
+else
+	for _, child in ServerStorage:GetChildren() do
+		local n = child.Name
+		if n:match("^REFERENCE_") or n == "Quarantine" or n:match("^Snapshots_") or n == "W1_Backups" then
+			table.insert(roots, child)
+		end
+	end
+end
+
+local usedBy: { [string]: { string } } = {}
+local function add(id: string, where: string)
+	local list = usedBy[id]
+	if not list then
+		list = {}
+		usedBy[id] = list
+	end
+	if #list < 5 then
+		table.insert(list, where)
+	end
+end
+
+for _, root in roots do
+	local ok, all = pcall(root.GetDescendants, root)
+	if ok then
+		for _, inst in all do
+			local props = PROPS[inst.ClassName]
+			if props then
+				for _, prop in props do
+					local okRead, value = pcall(function()
+						return (inst :: any)[prop]
+					end)
+					local id = if okRead then idOf(value) else nil
+					if id then
+						add(id, inst:GetFullName() .. "." .. prop)
+					end
+				end
+			end
+		end
+	end
+end
+for _, id in EXTRA_IDS do
+	add(tostring(id), "EXTRA_IDS")
+end
+
+local ids: { string } = {}
+for id in usedBy do
+	table.insert(ids, id)
+end
+table.sort(ids)
+print(("[sounds] %d unique ids found"):format(#ids))
+
+if COLLECT_ONLY then
+	print("EXTRA_IDS = {" .. table.concat(ids, ", ") .. "}")
+else
+	local status: { [string]: string } = {}
+	for i = 1, #ids, BATCH do
+		local probes = {}
+		for j = i, math.min(i + BATCH - 1, #ids) do
+			local probe = Instance.new("Sound")
+			probe.SoundId = "rbxassetid://" .. ids[j]
+			table.insert(probes, probe)
+		end
+		ContentProvider:PreloadAsync(probes, function(contentId: string, fetchStatus: Enum.AssetFetchStatus)
+			local id = idOf(contentId)
+			if id then
+				status[id] = fetchStatus.Name
+			end
+		end)
+		for _, probe in probes do
+			probe:Destroy()
+		end
+		print(("[sounds] checked %d/%d"):format(math.min(i + BATCH - 1, #ids), #ids))
+	end
+
+	local open: { string } = {}
+	local blocked: { string } = {}
+	for _, id in ids do
+		if status[id] == "Success" then
+			table.insert(open, '"' .. id .. '", -- ' .. usedBy[id][1])
+		else
+			table.insert(blocked, id .. " (" .. (status[id] or "no result") .. ")")
+		end
+	end
+	print(("[sounds] OPEN USE %d:\n{\n\t%s\n}"):format(#open, table.concat(open, "\n\t")))
+	warn(("[sounds] NOT USABLE %d: %s"):format(#blocked, table.concat(blocked, ", ")))
+end
+```
+
+</details>
+
+<details><summary>3. Meshes (command bar)</summary>
+
+```lua
+-- OPEN-USE CHECK: MESHES. Paste into the Studio command bar of OUR place (122907972658396).
+-- Finds every mesh id in the reference folders and asks Roblox whether this place may load it.
+-- Prints the open-use ids as a Luau list (with where each was found) and warns the rest.
+-- In the decomp Studio, set COLLECT_ONLY = true: it only prints the ids; paste them into EXTRA_IDS here.
+local COLLECT_ONLY = false
+local EXTRA_IDS = {} -- e.g. {"118694371557807", 123456789}
+local BATCH = 50
+
+local ServerStorage = game:GetService("ServerStorage")
+local ContentProvider = game:GetService("ContentProvider")
+
+local PROPS: { [string]: { string } } = {
+	MeshPart = { "MeshId" },
+	SpecialMesh = { "MeshId" },
+}
+
+local function idOf(value: any): string?
+	if typeof(value) ~= "string" then
+		return nil
+	end
+	return value:match("rbxassetid://(%d+)") or value:match("[?&]id=(%d+)")
+end
+
+local roots: { Instance } = {}
+if COLLECT_ONLY then
+	roots = { game }
+else
+	for _, child in ServerStorage:GetChildren() do
+		local n = child.Name
+		if n:match("^REFERENCE_") or n == "Quarantine" or n:match("^Snapshots_") or n == "W1_Backups" then
+			table.insert(roots, child)
+		end
+	end
+end
+
+local usedBy: { [string]: { string } } = {}
+local function add(id: string, where: string)
+	local list = usedBy[id]
+	if not list then
+		list = {}
+		usedBy[id] = list
+	end
+	if #list < 5 then
+		table.insert(list, where)
+	end
+end
+
+for _, root in roots do
+	local ok, all = pcall(root.GetDescendants, root)
+	if ok then
+		for _, inst in all do
+			local props = PROPS[inst.ClassName]
+			if props then
+				for _, prop in props do
+					local okRead, value = pcall(function()
+						return (inst :: any)[prop]
+					end)
+					local id = if okRead then idOf(value) else nil
+					if id then
+						add(id, inst:GetFullName() .. "." .. prop)
+					end
+				end
+			end
+		end
+	end
+end
+for _, id in EXTRA_IDS do
+	add(tostring(id), "EXTRA_IDS")
+end
+
+local ids: { string } = {}
+for id in usedBy do
+	table.insert(ids, id)
+end
+table.sort(ids)
+print(("[meshes] %d unique ids found"):format(#ids))
+
+if COLLECT_ONLY then
+	print("EXTRA_IDS = {" .. table.concat(ids, ", ") .. "}")
+else
+	local status: { [string]: string } = {}
+	for i = 1, #ids, BATCH do
+		local probes = {}
+		for j = i, math.min(i + BATCH - 1, #ids) do
+			local probe = Instance.new("SpecialMesh")
+			probe.MeshType = Enum.MeshType.FileMesh
+			probe.MeshId = "rbxassetid://" .. ids[j]
+			table.insert(probes, probe)
+		end
+		ContentProvider:PreloadAsync(probes, function(contentId: string, fetchStatus: Enum.AssetFetchStatus)
+			local id = idOf(contentId)
+			if id then
+				status[id] = fetchStatus.Name
+			end
+		end)
+		for _, probe in probes do
+			probe:Destroy()
+		end
+		print(("[meshes] checked %d/%d"):format(math.min(i + BATCH - 1, #ids), #ids))
+	end
+
+	local open: { string } = {}
+	local blocked: { string } = {}
+	for _, id in ids do
+		if status[id] == "Success" then
+			table.insert(open, '"' .. id .. '", -- ' .. usedBy[id][1])
+		else
+			table.insert(blocked, id .. " (" .. (status[id] or "no result") .. ")")
+		end
+	end
+	print(("[meshes] OPEN USE %d:\n{\n\t%s\n}"):format(#open, table.concat(open, "\n\t")))
+	warn(("[meshes] NOT USABLE %d: %s"):format(#blocked, table.concat(blocked, ", ")))
+end
+```
+
+</details>
+
 ### Step A: fact base (read-only), in parallel
 
 Launch **five subagents at once**, one per feature. They only read: `script_read` / `script_grep` / `search_game_tree` / `inspect_instance`, and `loadstring(Source)` for compile checks.
@@ -262,7 +681,8 @@ Return:
 1. Existing systems this feature must reuse (exact paths, line numbers, the functions to call).
 2. Data: where player data lives, the schema/version field, how new fields get defaults.
 3. Remotes: where they're registered and how they're validated; the receipt handler path.
-4. UI: existing instances to extend (paths), style to match (fonts, colours, strokes).
+4. UI: existing instances to extend (paths), style to match (fonts, colours, strokes), and suitable
+   open-use images/sounds/meshes from ServerStorage.OpenUseAssets or the Step A0 lists.
 5. Streaming risks for this feature (parts that may be missing on the client).
 6. Questions only the user can answer, each with your recommendation.
 7. A build plan: ordered steps with files, server vs client, effort XS–L.
@@ -321,7 +741,11 @@ Also include the Creator Hub list of products the user must create, with names, 
 - **No playtests without the user's permission.** The user playtests and reports.
 - **Before anything visual,** load the user's installed skill `roll-egg-art-direction` (`~/.claude/skills/roll-egg-art-direction/SKILL.md`) and follow it.
 - **Never move or rebuild the map.** Inspect before editing; don't override the user's changes.
-- **Never copy** from `ServerStorage.REFERENCE_PARKED`, `REFERENCE_PLEASEUSE`, `Quarantine`, `Snapshots_*`, `W1_Backups` or the Steal an Egg decomp.
+- **Reference folders** (`ServerStorage.REFERENCE_PARKED`, `REFERENCE_PLEASEUSE`, `Quarantine`, `Snapshots_*`, `W1_Backups`, and the Steal an Egg decomp):
+  - **You may read them** (scripts, UI, models) to learn how something works.
+  - **You may use their image, sound and mesh assets** only when the open-use check (section 3, Step A0) says the asset is usable by this place. Reference it by its asset id.
+  - **Never copy** their scripts, code, UI layouts or models into the game.
+  - This replaces the older "consult-only, never copy" rule. Update that standing rule in `DEV_NOTES.md` to match, and log it.
 - **Never copy** assets from the reference screenshots' games.
 - **No Creator Hub.** List new products for the user; never click through it or enter credentials.
 - **Edit-mode `require` caches stale modules.** Verify with `loadstring(Source)` or a clone parented next to its siblings.
@@ -336,7 +760,7 @@ Also include the Creator Hub list of products the user must create, with names, 
 1. **After Step A:** send the Step B message and wait. Build only answered items. If something is unanswered, skip it and keep going.
 2. **When done:**
    - Commit on `claude/stoic-lamport-jqadwi`:
-     - the audit file;
+     - the audit file (including the Step A0 open-use lists);
      - a report at `handoffs/2026-10-15-retention-monetization-report.md`;
      - screenshots in `handoffs/2026-10-15-refs/built/`.
    - Tell the user it's ready to push.
