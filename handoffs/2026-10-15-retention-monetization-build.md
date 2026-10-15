@@ -20,6 +20,21 @@
 |---|---|
 | Player psychology guidelines | https://github.com/Apollo9360/roll-egg-notes/blob/main/roblox-dev/18%20-%20Game%20Design/Roblox%20Player%20Psychology%20Guidelines.md |
 | StreamingEnabled and large worlds | https://github.com/Apollo9360/roll-egg-notes/blob/main/roblox-dev/17%20-%20Performance/StreamingEnabled%20and%20Large%20Worlds.md |
+| Steal an Egg teardown (the reference game; the user's own research page) | https://claude.ai/artifact/MAhNhAvKyDcWYoTao8CpNX |
+
+**If you can't open the claude.ai teardown link,** the lessons that matter for these five features are summarised here, from its data as of 11 Oct 2026:
+
+- **Steal an Egg runs on timers, the 5-minute reset and offline hatching.**
+  - It has **no daily login rewards, streaks, quests or codes**, and the teardown says it weakens at days 8–28.
+  - Playtime rewards (feature 2) and the freebie egg (feature 1) fill exactly that gap.
+- **Its first purchase is a 3 R$ "x2 Speed" HUD offer.**
+  - Its paid ladder includes Speed packs (79 → 2,999 R$) that skip whole biomes. YouTubers call it pay-to-win, and the teardown warns this "empties out the core loop".
+  - Our starter packs give fixed, non-scaling items, so they help early without replacing play.
+- **Getting bat-hit or trapped in the first 2–3 minutes is a top quit reason** (seen in four languages), along with "no private servers".
+  - So the on-hit popup (feature 4) must never show during the tutorial or the new-player grace window. A sales pitch right after a griefing hit must not feel like mockery: keep it short and closable.
+- **Mobile:** side-by-side cash and Robux buttons caused an accidental Robux purchase on camera. Give every Robux button a different shape and colour from cash buttons, large touch targets, and the confirm step.
+- **Make outcomes legible.** Players couldn't find odds, mutation status or trail multipliers in-game, and guides disagree on every number. Show the numbers in the playtime panel, the packs and the ODDS button.
+- **Offline hatching and long timers are its main day-1 return reason.** The leave overlay (feature 5) and the freebie egg lean on the same pull, honestly.
 
 Why the StreamingEnabled note matters here: the freebie egg sits on a plot and the hit popup listens for hits. On the client, Workspace parts can be missing or streamed out, so:
 - read state from **server-set attributes or ReplicatedStorage**, not from parts that may not exist;
@@ -167,9 +182,9 @@ The HUD also shows a corner offer, "STARTER PACK! ONLY 9 R$".
   - Super pet ≈ a strong Riverbank pet;
   - Mega pet ≈ a top Canyon pet.
   Check the real income tables in config before proposing.
-- **Conflicts to raise with the user:**
-  - "x2 Money Forever" in the Mega pack overlaps `Pass2xMoney` (399 R$). Options: a separate stacking multiplier, grant the pass effect, or replace it with something else for pass owners.
-  - The existing `Starter2xSpeed` (3 R$): keep it, fold it into the Starter Pack, or retire it.
+- **Decided by the user (2026-10-15):**
+  - "x2 Money Forever" from the Mega pack **stacks** with `Pass2xMoney`: an owner of both earns ×4 from these two. Make it a separate saved multiplier, and show the stacking in the pack text.
+  - **Scrap the old `Starter2xSpeed` (3 R$) product.** Remove its HUD offer and Shop entry and its config entry. Keep its receipt handler able to grant it, so any purchase still in flight is honoured, and note this in DEV_NOTES. Tell the user to take it off sale in Creator Hub (don't do it yourself).
 - **When to show it:**
   - **not before the first reward lands, and not during the tutorial** (the psychology rule is to give before you ask);
   - recommended: the HUD corner offer and the panel become available after tutorial completion;
@@ -195,7 +210,7 @@ The HUD also shows a corner offer, "STARTER PACK! ONLY 9 R$".
 - **Guards against spam:**
   - don't stack: if it's already showing, refresh the timer instead of opening a second one;
   - don't show during the tutorial or the first-timer grace window;
-  - recommend a cooldown between shows (e.g. 3 minutes). **Ask the user**, because the request says "whenever".
+  - **cooldown: 3 minutes between shows** (decided by the user, 2026-10-15). Hits during the cooldown show nothing.
 
 ### Feature 5: "don't leave" overlay when the player tries to leave
 
@@ -267,9 +282,12 @@ Ask in **one message**, with a recommendation for each:
 | Q3 | Playtime thresholds and the 12 rewards (show your proposed list) | The 1 … 60 min list above, best gift at 60 |
 | Q4 | Include Skip All (Robux)? Price? | Yes, 199 R$, with an ODDS button |
 | Q5 | Starter pack prices and contents (show the numbers) | 9 / 59 / 199 R$ as in the reference |
-| Q6 | "x2 Money Forever" vs `Pass2xMoney` | A separate permanent multiplier that stacks; tell the user the stacking maths |
-| Q7 | Existing 3 R$ `Starter2xSpeed` | Fold into the Starter Pack and retire it |
-| Q8 | What counts as "hit" for the popup, and the cooldown | All hit sources; 3 min cooldown; never in the tutorial |
+| Q6 | What counts as "hit" for the popup (list what you found) | All hit sources; never in the tutorial |
+
+**Already decided (don't ask again):**
+- the Mega pack's x2 Money **stacks** with the pass;
+- **scrap** the 3 R$ `Starter2xSpeed`;
+- the hit popup has a **3-minute cooldown**.
 
 Also include the Creator Hub list of products the user must create, with names, prices and descriptions.
 
